@@ -2792,47 +2792,73 @@ pointer-events:none;
 }
 
 /*======================================
-MOBILE OPTIMIZATION
+MOBILE FINAL UI
+PART 1
 ======================================*/
 
-/*========== HEADER ==========*/
 @media (max-width:768px){
 
-
+/*=========================
+HEADER
+=========================*/
 
 #header{
+
 padding:10px 0;
+
+backdrop-filter:blur(12px);
+
+}
+
+.header-container{
+
+gap:10px;
+
 }
 
 .logo img{
+
 width:42px;
+
 height:42px;
+
 }
 
 .logo h2{
-font-size:16px;
+
+font-size:17px;
+
 }
 
 .logo span{
+
 display:none;
+
 }
 
-/* فقط سبد خرید و سرچ بماند */
 #menuButton,
 .menu-button,
 .hamburger{
+
 display:none !important;
+
 }
 
-/*========== HERO ==========*/
+/*=========================
+HERO
+=========================*/
 
 .hero{
 
-height:390px;
+height:285px;
 
-margin-top:66px;
+min-height:285px;
 
-border-radius:0 0 28px 28px;
+margin-top:72px;
+
+border-radius:0 0 22px 22px;
+
+overflow:hidden;
 
 }
 
@@ -2849,9 +2875,13 @@ object-fit:cover;
 .hero-overlay{
 
 background:linear-gradient(
+
 180deg,
-rgba(0,0,0,.58),
-rgba(0,0,0,.35)
+
+rgba(0,0,0,.60),
+
+rgba(0,0,0,.25)
+
 );
 
 }
@@ -2860,41 +2890,47 @@ rgba(0,0,0,.35)
 
 width:90%;
 
-align-items:center;
+margin:auto;
 
 justify-content:center;
 
+align-items:center;
+
 text-align:center;
+
+padding:10px;
 
 }
 
 .hero-badge{
 
+padding:7px 15px;
+
 font-size:12px;
 
-padding:8px 18px;
-
 margin-bottom:12px;
+
+border-radius:20px;
 
 }
 
 .hero-content h1{
 
-font-size:40px;
+font-size:30px;
 
-margin-bottom:10px;
+line-height:1.15;
 
-line-height:1.1;
+margin-bottom:8px;
 
 }
 
 .hero-content p{
 
-font-size:15px;
+font-size:14px;
 
-line-height:1.8;
+line-height:1.7;
 
-margin-bottom:18px;
+margin-bottom:16px;
 
 max-width:310px;
 
@@ -2902,9 +2938,13 @@ max-width:310px;
 
 .hero-buttons{
 
+display:flex;
+
 justify-content:center;
 
 gap:10px;
+
+flex-wrap:wrap;
 
 }
 
@@ -2912,121 +2952,257 @@ gap:10px;
 
 height:44px;
 
-padding:0 22px;
+min-width:130px;
 
-font-size:15px;
+padding:0 18px;
+
+font-size:14px;
+
+font-weight:700;
 
 border-radius:14px;
 
 }
 
-/*========== SEARCH ==========*/
+/*=========================
+SEARCH
+=========================*/
+
+.search-section{
+
+margin-top:14px;
+
+margin-bottom:18px;
+
+}
 
 .search-box{
 
-height:54px;
+width:80%;
+
+max-width:340px;
+
+margin:auto;
+
+height:46px;
 
 border-radius:18px;
+
+background:#fff;
+
+box-shadow:
+
+0 8px 20px rgba(0,0,0,.08);
 
 }
 
 .search-box input{
 
+font-size:14px;
+
+padding:0 14px;
+
+}
+
+.search-box button{
+
+width:42px;
+
 font-size:15px;
 
 }
 
-/*========== PRODUCT BUTTONS ==========*/
+/*=========================
+CATEGORY SECTION
+=========================*/
+
+.category-section{
+
+padding:18px 0 24px;
+
+}
+
+.category-wrapper{
+
+padding:10px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.30);
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.category-wrapper.sticky{
+
+top:68px;
+
+padding:8px;
+
+border-radius:16px;
+
+}
+
+.category-wrapper::after{
+
+display:none;
+
+}
+
+.category-track{
+
+gap:8px;
+
+padding:4px;
+
+}
+
+.category-card{
+
+min-width:82px;
+
+min-height:88px;
+
+padding:10px 8px;
+
+border-radius:16px;
+
+}
+
+.category-card img{
+
+width:34px;
+
+height:34px;
+
+object-fit:contain;
+
+}
+
+.category-card h3{
+
+font-size:13px;
+
+margin-top:8px;
+
+font-weight:700;
+
+line-height:1.3;
+
+}
+
+.category-count{
+
+display:none;
+
+}
+
+/*=========================
+ACTIVE BG
+=========================*/
+
+.category-active-bg{
+
+height:42px;
+
+border-radius:14px;
+
+}
+
+/*=========================
+SECTION TITLE
+=========================*/
+
+.section-title{
+
+margin-bottom:18px;
+
+}
+
+.section-title h2{
+
+font-size:28px;
+
+}
+
+.section-title p{
+
+font-size:14px;
+
+margin-top:6px;
+
+}
+
+/*=========================
+PRODUCT GRID
+=========================*/
+
+.products-grid{
+
+gap:14px;
+
+}
+
+.product-card{
+
+border-radius:18px;
+
+overflow:hidden;
+
+}
+
+.product-image{
+
+height:150px;
+
+}
+
+.product-info{
+
+padding:14px;
+
+}
+
+.product-title{
+
+font-size:15px;
+
+line-height:1.5;
+
+}
+
+.product-price{
+
+font-size:18px;
+
+margin:10px 0;
+
+}
 
 .product-card .btn,
 .product-btn{
 
 height:42px;
 
+padding:0 16px;
+
 font-size:14px;
 
-font-weight:600;
+font-weight:700;
 
-border-radius:12px;
-
-}
-
-/*========== PRODUCT POPUP ==========*/
-
-.product-modal-content{
-
-width:92%;
-
-max-width:360px;
-
-padding:18px;
-
-border-radius:22px;
+border-radius:14px;
 
 }
-
-.product-modal-content img{
-
-max-height:170px;
-
-object-fit:contain;
-
-}
-
-.product-modal-content h2{
-
-font-size:28px;
-
-margin:10px 0;
-
-}
-
-.product-modal-content .price{
-
-font-size:22px;
-
-}
-
-.quantity-box{
-
-margin:18px 0;
-
-}
-
-.add-cart-btn{
-
-height:46px;
-
-font-size:15px;
-
-}
-
-/*========== TOAST ==========*/
-
-.toast{
-
-font-size:13px;
-
-padding:10px 16px;
-
-min-height:auto;
-
-line-height:1.4;
-
-border-radius:12px;
-
-max-width:260px;
-
-text-align:center;
-
-}
-
-}
-/*======================================
-PRODUCT MODAL MOBILE
-======================================*/
-
-@media (max-width:768px){
+/*=========================
+PRODUCT MODAL
+=========================*/
 
 .modal{
 
@@ -3050,9 +3226,11 @@ overflow:hidden;
 
 .modal-image{
 
-padding:18px;
+padding:16px;
 
 height:170px;
+
+background:#fafafa;
 
 }
 
@@ -3098,9 +3276,9 @@ margin-bottom:6px;
 
 font-size:22px;
 
-margin-bottom:10px;
-
 line-height:1.3;
+
+margin-bottom:10px;
 
 }
 
@@ -3116,24 +3294,61 @@ margin-bottom:14px;
 
 #modalPrice{
 
-font-size:24px;
+font-size:23px;
 
 margin-bottom:18px;
 
 }
 
-}
-/*======================================
-CUSTOMER BUTTONS MOBILE
-======================================*/
+/*=========================
+CUSTOMER MODAL
+=========================*/
 
-@media (max-width:768px){
+.customer-modal-content{
+
+width:92%;
+
+max-width:340px;
+
+padding:20px;
+
+border-radius:18px;
+
+}
+
+.customer-modal-content input,
+
+.customer-modal-content textarea{
+
+height:46px;
+
+font-size:14px;
+
+border-radius:12px;
+
+padding:0 14px;
+
+}
+
+.customer-modal-content textarea{
+
+height:90px;
+
+padding-top:12px;
+
+resize:none;
+
+}
+
+/*=========================
+CUSTOMER BUTTONS
+=========================*/
 
 .customer-buttons{
 
-display:flex;
+display:grid;
 
-flex-direction:column;
+grid-template-columns:1fr 1fr;
 
 gap:10px;
 
@@ -3142,19 +3357,98 @@ margin-top:16px;
 }
 
 .customer-buttons .primary-btn,
+
 .customer-buttons .secondary-btn{
 
 height:44px;
 
-padding:0 16px;
+padding:0 8px;
+
+font-size:13px;
+
+font-weight:700;
+
+border-radius:14px;
+
+white-space:nowrap;
+
+}
+
+/*=========================
+TOAST
+=========================*/
+
+.toast{
+
+max-width:250px;
+
+padding:10px 14px;
+
+font-size:13px;
+
+line-height:1.5;
+
+border-radius:12px;
+
+min-height:auto;
+
+}
+
+/*=========================
+BACK TO TOP
+=========================*/
+
+.back-top{
+
+width:44px;
+
+height:44px;
+
+bottom:18px;
+
+left:18px;
+
+}
+
+/*=========================
+FOOTER
+=========================*/
+
+.footer{
+
+padding:34px 0;
+
+}
+
+.footer h3{
+
+font-size:18px;
+
+}
+
+.footer p,
+
+.footer a{
 
 font-size:14px;
 
-font-weight:600;
+}
 
-line-height:1;
+/*=========================
+SMALL FIXES
+=========================*/
 
-border-radius:14px;
+section{
+
+scroll-margin-top:80px;
+
+}
+
+img{
+
+max-width:100%;
+
+height:auto;
 
 }
 
