@@ -5,7 +5,15 @@ Author : Parsa
 
 const SETTINGS = {
 
-PRICE_MULTIPLIER:1,
+BRAND_PRICE_MULTIPLIER:{
+
+    skp:1,
+
+    apco:1,
+
+    shayan:1
+
+},
 
 CURRENCY:"تومان",
 
@@ -23,9 +31,23 @@ GLOBAL
 
 const App={
 
+/*======================================
+BRAND
+======================================*/
+
+currentBrand:"skp",
+
+brands:window.products.brands,
+
 products:[],
 
 filteredProducts:[],
+
+categories:[],
+
+/*======================================
+GENERAL
+======================================*/
 
 cart:JSON.parse(localStorage.getItem("cart")) || [],
 
@@ -45,10 +67,35 @@ App.cacheDOM=function(){
   
 
 this.elements={
-
+checkoutBtn:
+document.getElementById("checkoutBtn"),
+    customerModal:
+document.getElementById("customerModal"),
 loader:document.getElementById("loader"),
 
 header:document.getElementById("header"),
+
+heroTitle:document.getElementById("heroTitle"),
+
+heroDescription:document.getElementById("heroDescription"),
+
+heroImage:document.getElementById("heroImage"),
+
+heroBadgeLogo:document.getElementById("heroBadgeLogo"),
+
+heroBadgeText:document.getElementById("heroBadgeText"),
+
+activeBrandLogo:document.getElementById("activeBrandLogo"),
+
+activeBrandName:document.getElementById("activeBrandName"),
+
+activeBrandDescription:document.getElementById("activeBrandDescription"),
+
+brandProductCount:document.getElementById("brandProductCount"),
+
+brandBar:document.getElementById("brandBar"),
+
+brandBarOffset:0,
 
 searchInput:document.getElementById("searchInput"),
 
@@ -118,7 +165,8 @@ customerPhone:document.getElementById("customerPhone"),
 
 customerAddress:document.getElementById("customerAddress"),
 
-sendWhatsappBtn:document.getElementById("sendWhatsappBtn"),
+checkoutBtn:
+document.getElementById("checkoutBtn"),
 
 sendEmailBtn:document.getElementById("sendEmailBtn")
 
@@ -132,22 +180,167 @@ LOAD PRODUCTS
 
 App.loadProducts=function(){
 
-this.products=(window.products || []).map(item=>{
+    const brandData=window.products.data[this.currentBrand] || [];
 
-return{
+    this.products=brandData.map(item=>{
 
-...item,
+        return{
 
-price:Math.round(item.price*SETTINGS.PRICE_MULTIPLIER)
+            ...item,
+
+            brand:this.currentBrand,
+
+            price:Math.round(
+                item.price *
+                (SETTINGS.BRAND_PRICE_MULTIPLIER[this.currentBrand] || 1)
+            )
+
+        };
+
+    });
+
+    this.filteredProducts=[...this.products];
+
+    this.categories=[
+
+        "همه محصولات",
+
+        ...new Set(
+            this.products.map(item=>item.category)
+        )
+
+    ];
 
 };
 
-});
+/*======================================
+CHANGE BRAND
+======================================*/
 
-this.filteredProducts=[...this.products];
+App.changeBrand=function(brand){
+
+if(this.currentBrand===brand) return;
+
+this.currentBrand=brand;
+
+localStorage.setItem("currentBrand",brand);
+
+this.loadProducts();
+this.elements.productsGrid.classList.add("switching");
+
+this.elements.categoryTrack.classList.add("switching");
+
+document
+
+.querySelector(".hero-content")
+
+.classList.add("switching");
+
+document
+
+.querySelector(".active-brand-box")
+
+.classList.add("switching");
+const hero=document.getElementById("heroImage");
+
+hero.style.opacity="0";
+setTimeout(()=>{
+
+this.renderCategories();
+
+this.renderProducts(this.products);
+const heroImages={
+
+SKP:"asset/brands/6.avif",
+
+APCO:"images/hero/apco.webp",
+
+SHAYAN:"images/hero/shayan.webp"
 
 };
 
+hero.src=heroImages[brand] || "images/hero/skp.webp";
+this.updateBrandUI();
+hero.onload=()=>{
+
+hero.style.opacity="1";
+
+};
+this.elements.productsGrid.classList.remove("switching");
+
+this.elements.categoryTrack.classList.remove("switching");
+
+document
+
+.querySelector(".hero-content")
+
+.classList.remove("switching");
+
+document
+
+.querySelector(".active-brand-box")
+
+.classList.remove("switching");
+
+},250);
+};
+/*======================================
+UPDATE BRAND UI
+======================================*/
+App.updateBrandUI=function(){
+
+const brand=this.brands[this.currentBrand];
+
+if(!brand) return;
+
+this.elements.heroTitle.textContent=
+brand.hero.title;
+
+this.elements.heroDescription.textContent=
+brand.hero.text;
+
+this.elements.heroBadgeText.textContent=
+brand.name;
+
+
+
+this.elements.activeBrandLogo.src=
+brand.logo;
+
+this.elements.activeBrandName.textContent=
+brand.name;
+
+this.elements.activeBrandDescription.textContent=
+brand.hero.title;
+
+this.elements.brandProductCount.textContent=
+`${this.products.length} محصول`;
+
+/* Hero Image */
+
+if(this.elements.heroImage){
+
+this.elements.heroImage.src=
+brand.hero.image;
+
+}
+
+};
+/*======================================
+LOAD LAST BRAND
+======================================*/
+
+App.loadLastBrand=function(){
+
+const saved=localStorage.getItem("currentBrand");
+
+if(saved && window.products.data[saved]){
+
+this.currentBrand=saved;
+
+}
+
+};
 /*======================================
 FORMAT PRICE
 ======================================*/
@@ -203,8 +396,11 @@ INIT
 ======================================*/
 
 App.init=function(){
+this.loadLastBrand();
 
 this.cacheDOM();
+this.elements.brandBarOffset=
+this.elements.brandBar.offsetTop;
 
 this.loadProducts();
 
@@ -835,28 +1031,26 @@ HEADER
 
 App.headerScroll=function(){
 
-const current=window.scrollY;
+const scroll=window.scrollY;
 
-if(current>120){
+const trigger=
+this.elements.brandBarOffset-88;
 
-this.elements.header.classList.toggle(
+if(scroll>=trigger){
 
-"hide",
+this.elements.header.classList.add("hide");
 
-current>this.lastScroll
-
-);
+this.elements.brandBar.classList.add("fixed");
 
 }else{
 
 this.elements.header.classList.remove("hide");
 
+this.elements.brandBar.classList.remove("fixed");
+
 }
 
-this.lastScroll=current;
-
 };
-
 /*======================================
 BACK TOP
 ======================================*/
@@ -906,71 +1100,20 @@ document
 };
 
 /*======================================
-WHATSAPP
+CUSTOMER MODAL
 ======================================*/
 
-App.sendWhatsapp=function(){
+App.openCustomerModal=function(){
 
-const name=this.elements.customerName.value.trim();
-
-const phone=this.elements.customerPhone.value.trim();
-
-const address=this.elements.customerAddress.value.trim();
-
-if(!name||!phone||!address){
-
-this.toast("اطلاعات را کامل کنید");
-
-return;
-
-}
-
-let message=`🛒 سفارش جدید
-
-👤 ${name}
-
-📞 ${phone}
-
-📍 ${address}
-
---------------------
-
-`;
-
-let total=0;
-
-this.cart.forEach(item=>{
-
-const sum=item.price*item.quantity;
-
-total+=sum;
-
-message+=`${item.title}
-
-تعداد : ${item.quantity}
-
-${this.price(sum)}
-
---------------------
-
-`;
-
-});
-
-message+=`جمع کل :
-
-${this.price(total)}`;
-
-window.open(
-
-`https://wa.me/${SETTINGS.WHATSAPP}?text=${encodeURIComponent(message)}`,
-
-"_blank"
-
-);
+this.elements.customerModal.classList.add("active");
 
 };
 
+App.closeCustomerModal=function(){
+
+this.elements.customerModal.classList.remove("active");
+
+};
 
 /*======================================
 EMAILJS
@@ -1054,7 +1197,40 @@ EVENTS
 ======================================*/
 
 App.bindEvents=function(){
+    
+/*======================================
+BRAND BAR
+======================================*/
 
+document
+
+.querySelectorAll(".brand-item")
+
+.forEach(button=>{
+
+button.onclick=()=>{
+
+document
+
+.querySelectorAll(".brand-item")
+
+.forEach(item=>{
+
+item.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+App.changeBrand(
+
+button.dataset.brand
+
+);
+
+};
+
+});
 // جستجو با دکمه
 this.elements.searchButton.onclick=()=>{
 
@@ -1129,7 +1305,15 @@ this.elements.customerModal.classList.remove("active");
 
 };
 
-this.elements.sendWhatsappBtn.onclick=()=>this.sendWhatsapp();
+if(this.elements.checkoutBtn){
+
+this.elements.checkoutBtn.onclick=()=>{
+
+this.elements.customerModal.classList.add("active");
+
+};
+
+}
 
 this.elements.sendEmailBtn.onclick=()=>this.sendEmail();
 
