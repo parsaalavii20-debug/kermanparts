@@ -35,7 +35,7 @@ rel="stylesheet">
 <link rel="stylesheet"
 href="style.css">
 
-<link rel="stylesheet" href="css/all.min.css">
+
 
 </head>
 
@@ -72,10 +72,11 @@ alt="Logo" style="zoom: 150%; ">
 <!--========================
 HEADER
 =========================-->
-
 <header id="header">
 
 <div class="container header-container">
+
+<div id="headerAccent"></div>
 
 <a href="#"
 
@@ -176,66 +177,181 @@ MAIN
 <main>
 
 <!--========================
-HERO
+HERO V2
 =========================-->
 
-<section class="hero">
+<section class="hero" id="hero">
 
-<img
+    <img
+        id="heroImage"
+        class="hero-image"
+        src="images/6.avif"
+        alt="Hero">
 
-class="hero-image"
+    <div class="hero-overlay"></div>
 
-src="images/6.avif"
+    <div class="hero-content">
 
-alt="Hero">
+        <div
+            id="heroBadge"
+            class="hero-badge">
+            <div id="heroBrandTransition"></div>
 
-<div class="hero-overlay"></div>
+            <img
+                id="heroBadgeLogo"
+                src=""
+                alt="">
 
-<div class="hero-content">
+            <span id="heroBadgeText">
+                SKP
+            </span>
 
-<div class="hero-badge">
+        </div>
 
-فروشگاه تخصصی قطعات خودرو
+        <h1 id="heroTitle">
+            قطعات برقی خودرو
+        </h1>
 
-</div>
+        <p id="heroDescription">
+            عرضه انواع سنسور، کویل، استپر موتور، رله و قطعات برقی خودرو
+        </p>
 
-<h1>
+        <div class="hero-buttons">
 
-Kerman Part
+            <a
+                href="#productsSection"
+                class="primary-btn">
 
-</h1>
+                مشاهده محصولات
 
-<p>
+            </a>
 
-عرضه انواع قطعات اصلی خودرو با بهترین قیمت
+            <a
+                href="#contact"
+                class="secondary-btn">
 
-</p>
+                تماس با ما
 
-<div class="hero-buttons">
+            </a>
 
-<a
+        </div>
 
-href="#productsSection"
+    </div>
 
-class="primary-btn">
+</section>
+<!--========================
+ACTIVE BRAND
+=========================-->
 
-مشاهده محصولات
+<section class="active-brand">
 
-</a>
+    <div class="container">
 
-<a
+        <div class="active-brand-box">
 
-href="#contact"
+            <div class="brand-left">
 
-class="secondary-btn">
+                <img
+                    id="activeBrandLogo"
+                    src="asset/skp.png"
+                    alt="">
 
-تماس با ما
+                <div>
 
-</a>
+                    <h2 id="activeBrandName">
+                        SKP
+                    </h2>
 
-</div>
+                    <p id="activeBrandDescription">
+                        قطعات برقی خودرو
+                    </p>
 
-</div>
+                </div>
+
+            </div>
+
+            <div class="brand-right">
+
+                <span id="brandProductCount">
+
+                    ۰ محصول
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--========================
+BRAND BAR
+=========================-->
+
+<section id="brandBar">
+
+    <div class="container">
+
+        <div class="brand-wrapper">
+
+            <button class="brand-item active" data-brand="skp">
+
+    <div class="brand-logo">
+
+        <img src="asset/skp.png" alt="SKP">
+
+    </div>
+
+    <div class="brand-info">
+
+        <strong>SKP</strong>
+
+        <span>قطعات برقی</span>
+
+    </div>
+
+</button>
+
+<button class="brand-item" data-brand="apco">
+
+    <div class="brand-logo">
+
+        <img src="asset/apco.png" alt="APCO">
+
+    </div>
+
+    <div class="brand-info">
+
+        <strong>APCO</strong>
+
+        <span>جلوبندی</span>
+
+    </div>
+
+</button>
+
+<button class="brand-item" data-brand="shayan">
+
+    <div class="brand-logo">
+
+        <img src="asset/shayan.png" alt="Shayan">
+
+    </div>
+
+    <div class="brand-info">
+
+        <strong>شایان صنعت</strong>
+
+        <span>کیت کلاچ</span>
+
+    </div>
+
+</button>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -243,7 +359,10 @@ class="secondary-btn">
 SEARCH
 =========================-->
 
-<section class="search-section">
+<section
+class="search-section"
+
+id="searchSection">
 
 <div class="container">
 
@@ -272,19 +391,23 @@ placeholder="جستجوی نام، کد یا دسته بندی...">
 CATEGORY
 =========================-->
 
-<section class="category-section">
+<section
+
+id="categorySection"
+
+class="category-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>
+<h2 id="categoryTitle">
 
-دسته بندی محصولات
+دسته بندی محصولات SKP
 
 </h2>
 
-<p>
+<p id="categorySubtitle">
 
 دسته مورد نظر خود را انتخاب کنید
 
@@ -321,19 +444,21 @@ PRODUCTS
 
 id="productsSection"
 
+data-brand="skp"
+
 class="products-section">
 
 <div class="container">
 
 <div class="section-title">
 
-<h2>
+<h2 id="productsTitle">
 
-محصولات
+محصولات SKP
 
 </h2>
 
-<p>
+<p id="productsSubtitle">
 
 قطعات اصلی خودرو
 
@@ -391,54 +516,51 @@ alt="">
 
 <div class="modal-info">
 
-<span id="modalCode"></span>
+    <div class="modal-brand">
 
-<h2 id="modalTitle"></h2>
+       
 
-<p id="modalInfo"></p>
+        <span id="modalBrandName">
 
-<h3 id="modalPrice"></h3>
+            SKP
 
-<div class="quantity-box">
+        </span>
 
-<button id="minusBtn">
+    </div>
 
-−
+    <span id="modalCode"></span>
 
-</button>
+    <h2 id="modalTitle"></h2>
 
-<input
+    <p id="modalInfo"></p>
 
-id="quantityInput"
+    <h3 id="modalPrice"></h3>
 
-type="number"
+    <div class="quantity-box">
 
-value="1"
+        <button id="minusBtn">−</button>
 
-min="1">
+        <input
+            id="quantityInput"
+            type="number"
+            value="1"
+            min="1">
 
-<button id="plusBtn">
+        <button id="plusBtn">+</button>
 
-+
+    </div>
 
-</button>
+    <button
+        id="addToCartBtn"
+        class="primary-btn">
 
-</div>
+        افزودن به سبد خرید
 
-<button
+    </button>
 
-id="addToCartBtn"
-
-class="primary-btn">
-
-افزودن به سبد خرید
-
-</button>
-
-</div>
 
 </div>
-
+</div>
 </div>
 
 <!--========================
@@ -537,11 +659,17 @@ class="close-btn">
 
 </button>
 
-<h2>
+<div class="customer-header">
 
-ثبت سفارش
+   
 
-</h2>
+    <h2 id="customerBrandTitle">
+
+        ثبت سفارش محصولات
+
+    </h2>
+
+</div>
 
 <input
 
@@ -569,15 +697,7 @@ placeholder="آدرس کامل">
 
 <div class="customer-buttons">
 
-<button
 
-id="sendWhatsappBtn"
-
-class="primary-btn">
-
-ثبت سفارش در واتساپ
-
-</button>
 
 <button
 
@@ -585,7 +705,7 @@ id="sendEmailBtn"
 
 class="secondary-btn">
 
-ارسال سفارش به ایمیل
+ثبت سفارش
 
 </button>
 
@@ -625,7 +745,7 @@ FOOTER
 <footer id="contact">
 
 <div class="container footer-container">
-
+<div id="footerAccent"></div>
 <div class="footer-about">
 
 <img
@@ -735,7 +855,7 @@ EMAILJS
 emailjs.init({
     publicKey: "gk4fVckL7S_UVAinr"
 });
-</script>
+</script>ّ
 
 <!--========================
 MAIN JS
